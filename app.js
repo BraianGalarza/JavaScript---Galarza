@@ -21,38 +21,22 @@ while (fin == 1){
     }
     // Usuario ingresa el valor de cada producto, ej: 10
     valor = +prompt("Ingrese el valor del producto")
-    // Comprueba que el valor ingresado sea un numero, si no es un numero deja la variable vacia
-    if (isNaN(valor)){
-        console.log("Por favor ingrese numeros validos. Vuelva a intentar.")
-        valor = ""
-    }
+
     // Bucle para que ingrese un numero valido si es que se ingreso un caracter invalido
-    while (valor == "" || valor == undefined){
-
+    while (valor == "" || valor == undefined || isNaN(valor)){
+        
+        console.log("Por favor ingrese numeros validos. Vuelva a intentar.")
         valor = +prompt("Ingrese un valor de cada producto")
-        if (isNaN(valor)){
-            console.log("Por favor ingrese numeros validos. Vuelva a intentar.")
-            valor = ""
-        }
-
     }
     // Usuario ingresa la cantidad de unidades de ese mismo producto, ej: 3
     cantidad = +prompt("Ingrese la cantidad de unidades del producto")
-    // Comprueba que el valor ingresado sea un numero, si no es un numero deja la variable vacia
-    if (isNaN(cantidad)){
 
-        console.log("Por favor ingrese numeros validos. Vuelva a intentar.")
-        cantidad = ""
-    }
     // Bucle para que ingrese un numero valido si es que se ingreso un caracter invalido
-    while (cantidad == "" || cantidad == undefined){
+    while (cantidad == "" || cantidad == undefined || isNaN(cantidad)){
         
+        console.log("Por favor ingrese numeros validos. Vuelva a intentar.")
         cantidad = +prompt("Ingrese la cantidad de unidades del producto")
-        if (isNaN(cantidad)){
 
-            console.log("Por favor ingrese numeros validos. Vuelva a intentar.")
-            cantidad = ""
-        }
     }
     // Print de los valores ingresados para llevar un registro visual de lo que ingrese el usuario
     console.log("Producto ingresado: " + producto)
