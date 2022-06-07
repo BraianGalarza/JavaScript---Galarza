@@ -63,7 +63,7 @@ while (fin == 1){
     if (PrimerProducto == 1){
 
         total = (cantidad * valor)
-        console.log("El monto total sumando el producto: " + producto + ", es de: " + total + "$")
+        console.log("El monto total sumando el producto: " + producto + ". Es de: " + total + "$")
         ConcatProduct = producto
     }
     else{
