@@ -10,11 +10,12 @@ let ConcatProduct2 = ""
 let producto = ""
 let valor = 0
 let cantidad = 0
-while (fin == 1){
+let arrayObjetos = []
+while (fin == 1) {
 
     // Usuario ingresa el nombre del producto, ej: "Camisa"
     producto = prompt("Ingrese nombre del producto")
-    while (producto == "" || producto == undefined){
+    while (producto == "" || producto == undefined) {
 
         producto = prompt("Ingrese nombre del producto")
 
@@ -23,8 +24,8 @@ while (fin == 1){
     valor = +prompt("Ingrese el valor del producto")
 
     // Bucle para que ingrese un numero valido si es que se ingreso un caracter invalido
-    while (valor == "" || valor == undefined || isNaN(valor)){
-        
+    while (valor == "" || valor == undefined || isNaN(valor)) {
+
         console.log("Por favor ingrese numeros validos. Vuelva a intentar.")
         valor = +prompt("Ingrese un valor de cada producto")
     }
@@ -32,8 +33,8 @@ while (fin == 1){
     cantidad = +prompt("Ingrese la cantidad de unidades del producto")
 
     // Bucle para que ingrese un numero valido si es que se ingreso un caracter invalido
-    while (cantidad == "" || cantidad == undefined || isNaN(cantidad)){
-        
+    while (cantidad == "" || cantidad == undefined || isNaN(cantidad)) {
+
         console.log("Por favor ingrese numeros validos. Vuelva a intentar.")
         cantidad = +prompt("Ingrese la cantidad de unidades del producto")
 
@@ -42,42 +43,41 @@ while (fin == 1){
     console.log("Producto ingresado: " + producto)
     console.log("Valor de cada " + producto + " : " + valor + "$")
     console.log("Cantidad ingresada: " + cantidad)
-
-    // Condicional utilizado para ver el total de los productos segun corresponda
-    if (PrimerProducto == 1){
-
-        total = (cantidad * valor)
-        console.log("El monto total sumando el producto: " + producto + ". Es de: " + total + "$")
-        ConcatProduct = producto
+    // Declaro el objeto "compra", en donde se guardan los datos anteriormente ingresados
+    const compra = {
+        producto: producto,
+        valor: valor,
+        cantidad: cantidad
     }
-    else{
+    //Push al array cada compra realizada
+    arrayObjetos.push(compra)
+    // ForEach utilizado para ver el total de los productos segun corresponda
+    arrayObjetos.forEach((compra, indice) => {
 
-        total = total + (cantidad * valor)
-        ConcatProduct2 = ConcatProduct + " y " + producto
-        ConcatProduct = ConcatProduct + ", " + producto
-        console.log("El monto total sumando los productos: " + ConcatProduct2 + ". Es de: " + total + "$")
+        total = total + ((compra.cantidad) * (compra.valor))
+        //total = (compra.cantidad * compra.valor) 
+        ConcatProduct = `${indice == 0 ? compra.producto : ConcatProduct + `${indice == arrayObjetos.length - 1 ? " y " : ", "}` + compra.producto}`
+        console.log(`El monto total sumando ${arrayObjetos.length>1?"los productos":"el producto"}: ${ConcatProduct}. Es de: $${total}`)
+    })
 
-    }
 
     // Bucle para preguntarle al usuario si desea seguir ingresando productos
-    while (true){
+    while (true) {
 
         let consulta = prompt("Desea sumar algun otro producto. (S/N)")
-        if (consulta == "N" || consulta == "n" ){
+        if (consulta == "N" || consulta == "n") {
 
             fin = 2
             break
-        }
-        else if (!(consulta == "S") && !(consulta == "s")){
-                
-             console.log("Por favor ingerse un caracter valido. (S/N)")
-            
-        }
-        else{
+        } else if (!(consulta == "S") && !(consulta == "s")) {
+
+            console.log("Por favor ingerse un caracter valido. (S/N)")
+
+        } else {
 
             PrimerProducto = 2
             break
         }
-    
+
     }
 }
