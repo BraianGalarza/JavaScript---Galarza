@@ -14,8 +14,9 @@ do{
         menuOpcion = +prompt("Ingrese un numero")
         if (menuOpcion == 1){
 
-            ingreso_Objeto_A_Array()       
-
+            const producto = pedirDatos()
+            ingreso_Objeto_A_Array(producto)       
+            
         }
     }else{
         //Menu de opciones para cuando el array tenga datos
@@ -24,12 +25,14 @@ do{
         console.log("2. Modificar producto")
         console.log("3. Eliminar producto")
         console.log("4. Lista de producto/s")
+        console.log("5. Imprimir lista en pantalla y salir")
         console.log("0. Salir")
         menuOpcion = +prompt("Ingrese un numero")
         //Switch utilizado para realizar la accion que ingreso el usuario
         switch(menuOpcion){
             case 1:
-                ingreso_Objeto_A_Array()
+                const producto = pedirDatos()
+                ingreso_Objeto_A_Array(producto)
                 break
             case 2:
                 let modificacionOpcion = 0
@@ -98,11 +101,30 @@ do{
                 })
                 console.log(`El monto total sumando ${arrayObjetos.length>1?"los productos":"el producto"}: ${ConcatProduct}. Es de: $${total}`)
                 break
+            case 5:
+                total = 0
+                for (const producto of arrayObjetos){
+                    total = total + ((producto.cantidad) * (producto.valor))
+                    let contenedor = document.createElement("div")
+                    contenedor.innerHTML = `<ul> ID: ${producto.idProducto}</ul><li> Producto: ${producto.nombre}</li><li> Cantidad: ${producto.cantidad}</li><li>Valor: $${producto.valor}</li>`
+                    document.body.appendChild(contenedor)
+                }
+                let parrafo = document.createElement("p")
+                parrafo.innerHTML = `<h2>Monto total de la compra: $${total}</h2>`
+                document.body.append(parrafo)
+                menuOpcion = 0
+                break
         }
     }
 }while(menuOpcion!=0)
 
-function ingreso_Objeto_A_Array() {
+function ingreso_Objeto_A_Array(producto) {
+    //Push al array cada compra realizada
+    arrayObjetos.push(producto)            
+
+}
+
+function pedirDatos() {
     let nombre = ""
     let valor = 0
     let cantidad = 0
@@ -138,14 +160,10 @@ function ingreso_Objeto_A_Array() {
     console.log("Producto ingresado: " + nombre)
     console.log("Valor de cada " + nombre + " : " + valor + "$")
     console.log("Cantidad ingresada: " + cantidad)
-    // Declaro el objeto "compra", en donde se guardan los datos anteriormente ingresados
-    let objeto = {
+    return { 
         nombre: nombre,
         valor: valor,
         cantidad: cantidad,
         idProducto: idProducto
     }
-    //Push al array cada compra realizada
-    arrayObjetos.push(objeto)            
-
 }
