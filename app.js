@@ -102,6 +102,7 @@ do{
                 console.log(`El monto total sumando ${arrayObjetos.length>1?"los productos":"el producto"}: ${ConcatProduct}. Es de: $${total}`)
                 break
             case 5:
+                //Aplicando DOM para insertar en el body algunos div con lista que contienen cada producto ingresado con sus detalles
                 total = 0
                 for (const producto of arrayObjetos){
                     total = total + ((producto.cantidad) * (producto.valor))
