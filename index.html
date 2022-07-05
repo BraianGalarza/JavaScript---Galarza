@@ -4,43 +4,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <title>JavaScript</title>
 </head>
 <body>
-
-    <h1>Segunda entrega del proyecto final</h1>
-    <h3>Carrito de compras</h3>
-    <div>
-        <ul id="ingresaProducto">
-            <p>Ingrese Nuevo Producto</p>
-            <li><input type="text" id="nombreProducto" placeholder="Nombre del Producto"></li>
-            <li><input type="text" id="valorProducto" placeholder="Valor del Producto"></li>
-            <li><input type="text" id="cantidadProducto" placeholder="Cantidad del Producto"></li>
-            <button id="btnagregarprod">Agregar producto</button> 
-        </ul>
+    <div class="index-titulo">
+        <!-- Section de Nombre-->
+        <section>
+            <h1 class="animate__animated animate__bounceInDown"><strong>Carrito de compras</strong></h1>
+            <br>
+        </section>
     </div>
-    <div>
-        <ul id="ulMod">
-            <p>Modificar Producto a elección</p>
-            <li><input type="text" id="idModProducto" placeholder="ID del Producto"></li>
-            <li><input type="text" id="nombreModProducto" placeholder="Nombre del Producto"></li>
-            <li><input type="text" id="valorModProducto" placeholder="Valor del Producto"></li>
-            <li><input type="text" id="cantidadModProducto" placeholder="Cantidad del Producto"></li>
-            <button id="btnmodprod">Modificar producto</button>
-        </ul>
+    <!-- div contenedor para los input -->
+    <div class="Flex-div">
+        <!-- imput de producto -->
+        <div class="animate__animated animate__bounceInDown">
+            <ul id="ingresaProducto" class="listas">
+                <p>Ingrese Nuevo Producto</p>
+                <li><input type="text" id="nombreProducto" placeholder="Nombre del Producto"></li>
+                <li><input type="text" id="valorProducto" placeholder="Valor del Producto"></li>
+                <li><input type="text" id="cantidadProducto" placeholder="Cantidad del Producto"></li>
+                <button id="btnagregarprod">Agregar producto</button> 
+            </ul>
+        </div>
+        <!-- imput de modificacion -->
+        <div class="animate__animated animate__bounceInDown">
+            <ul id="ulMod" class="listas">
+                <p>Modificar Producto a elección</p>
+                <li><input type="text" id="idModProducto" placeholder="ID del Producto"></li>
+                <li><input type="text" id="nombreModProducto" placeholder="Nombre del Producto"></li>
+                <li><input type="text" id="valorModProducto" placeholder="Valor del Producto"></li>
+                <li><input type="text" id="cantidadModProducto" placeholder="Cantidad del Producto"></li>
+                <button id="btnmodprod">Modificar producto</button>
+            </ul>
+        </div>
+        <!-- imput para eliminar -->
+        <div class="animate__animated animate__bounceInDown">
+            <ul id="ulElimina" class="listas">
+                <p>Elimina producto</p>
+                <li><input type="text" id="idEliminarProducto" placeholder="ID del Producto"></li>
+                <button id="btneliminarprod">Eliminar producto</button>
+            </ul>
+        </div>
     </div>
+    <!-- div contenedores para el manejo de DOM -->
+    <div id="contenedor" class="contenedor_lista animate__animated animate__bounceInDown"></div>
+    <div id="contenedor_monto" class="contenedor_monto animate__animated animate__bounceInDown"></div>
 
-    <div>
-        <ul id="ulElimina">
-            <p>Elimina producto</p>
-            <li><input type="text" id="idEliminarProducto" placeholder="ID del Producto"></li>
-            <button id="btneliminarprod">Eliminar producto</button>
-        </ul>
-    </div>
-    
-
-    <div id="contenedor"></div>
-
-    <script src="app.js"></script>
+    <script src="./assets/js/app.js"></script>
 </body>
 </html>

@@ -1,23 +1,20 @@
 //SUMA TOTAL DE PRODUCTOS QUE QUIERA EL USUARIO EN UNA COMPRA MAYORISTA
-console.log("Carrito de compras")
-
-console.log("Carrito de compras")
 
 //Variables
 let total = 0
+//trae lista del local storage
 const arrayObjetos = JSON.parse(localStorage.getItem("ListaProductos"))
+
 
 if (arrayObjetos == undefined || arrayObjetos == ""){
     //esconde botones de modificacion al iniciar 
     document.getElementById("ulElimina").hidden = true
     document.getElementById("ulMod").hidden = true
 }else{
+    //si hay objetos en el array muestra los botones y la lista de productos
     hidennButonn()
     ListaPantalla()
 }
-
-
-
 
 
 
@@ -42,6 +39,7 @@ function ingreso_Objeto_A_Array(producto) {
 
 }
 
+//funcion para tomar los datos del imput producto
 function pedirDatos() {
     let nombre = ""
     let valor = 0
@@ -56,7 +54,7 @@ function pedirDatos() {
     valorProducto.value = ""
     cantidadProducto.value = ""
     if (nombre == "" || nombre == undefined || valor == "" || valor == undefined || isNaN(valor) || cantidad == "" || cantidad == undefined || isNaN(cantidad)){
-        
+        //si no cumple los requisitos no agrega el producto
     }else{
 
         //Id interno del producto
@@ -89,9 +87,11 @@ function clickAgregarProd(){
 
 //funcion click modificar producto
 function clickModProd(){
+    //inicializo variables
     let nombre = ""
     let valor = 0
     let cantidad = 0
+    //traigo los datos de los imput mod y guardo los valores en las variables
     let nombreProducto = document.querySelector("#nombreModProducto")
     let valorProducto = document.querySelector("#valorModProducto")
     let cantidadProducto = document.querySelector("#cantidadModProducto")
@@ -104,19 +104,21 @@ function clickModProd(){
     let idProducto = document.querySelector("#idModProducto")
     idM = idProducto.value
 
+    //reseteo los imput
     idProducto.value = ""
     nombreProducto.value = ""
     valorProducto.value = ""
     cantidadProducto.value = ""
 
+    //recorro el array en busca del id ingresado
     let indexM = arrayObjetos.findIndex((producto) => producto.idProducto == idM)
-    if (indexM != -1){
-        if (nombre != "" && nombre != undefined && valor != "" && valor != undefined && isNaN(valor) == true && cantidad != "" && cantidad != undefined && isNaN(cantidad) == true){
 
+    if (indexM != -1){
+        //si encuentra el id agrega los datos ingresados
+        if (nombre != "" && nombre != undefined && valor != "" && valor != undefined && isNaN(valor) == true && cantidad != "" && cantidad != undefined && isNaN(cantidad) == true){
             arrayObjetos[indexM].nombre = nombre
             arrayObjetos[indexM].valor = valor
             arrayObjetos[indexM].cantidad = cantidad
-
         }else{
             if(nombre != "" && nombre != undefined){
                 arrayObjetos[indexM].nombre = nombre
@@ -135,46 +137,56 @@ function clickModProd(){
 
 //funcion impime lista en pantalla
 function ListaPantalla() {
-
+    //traido los elementos del contenedor y lo vacio
     let contenedor = document.getElementById("contenedor")
     contenedor.innerHTML = ""
     total = 0
+    //recorro el array sumando el total y creando la lista de objetos implementando DOM
     for (const producto of arrayObjetos){
         total = total + ((producto.cantidad) * (producto.valor))
+        const div = document.createElement("div")
         const ul = document.createElement("ul")
         const id = document.createElement("p")
         const li1= document.createElement("li")
         const li2= document.createElement("li")
         const li3= document.createElement("li")
-
+        
         id.innerText=  `ID: ${producto.idProducto}`
         li1.innerText= `Producto: ${producto.nombre}`
         li2.innerText= `Valor: ${producto.valor}`
         li3.innerText= `Cantidad: ${producto.cantidad}`
 
-        ul.appendChild(li1).appendChild(li2).appendChild(li3)
-        contenedor.appendChild(id).appendChild(ul)
+        ul.appendChild(li1)
+        ul.appendChild(li2)
+        ul.appendChild(li3)
+        contenedor.appendChild(div).appendChild(id)
+        contenedor.appendChild(div).appendChild(ul)
     }
     let parrafo = document.createElement("h2")
     parrafo.innerText = `Monto total de la compra: $${total}`
-    contenedor.append(parrafo)
+    let contenedor_monto = document.getElementById("contenedor_monto")
+    contenedor_monto.innerHTML = ""
+    contenedor_monto.append(parrafo)
 }
 
 //funcion click eliminar producto
 function clickEliminarProd() {
     let idE = 0
+    //tomo el id ingresado y guardo el valor en una variable
     let idProducto = document.querySelector("#idEliminarProducto")
-
     idE = idProducto.value
+    //busco el id en el array
     let indexE = arrayObjetos.findIndex((producto) => producto.idProducto == idE)
     if (indexE != -1){
+        //si encuentro el id lo elimino
         let eliminado = arrayObjetos.splice(indexE,1)
         console.log("El producto: " + eliminado[0].nombre + ", fue eliminado con exito")
         arrayObjetos.forEach((producto, indice) => {
             producto.idProducto = indice + 1
         })
-        hidennButonn()
+        idProducto.value = ""
         ListaPantalla()
+        hidennButonn()
         almacenarLocal()
     }
 }
@@ -183,14 +195,16 @@ function clickEliminarProd() {
 function hidennButonn(){
 
     if (arrayObjetos.length != 0) {
-    
+        //si hay objetos en el array, muestro los botones
         document.getElementById("ulElimina").hidden = false
         document.getElementById("ulMod").hidden = false
     
     }else{
-    
+        //si no hay objetos en el array, escondo los botones y vacio el contenedor del monto
         document.getElementById("ulElimina").hidden = true
         document.getElementById("ulMod").hidden = true
+        let contenedor_monto = document.getElementById("contenedor_monto")
+        contenedor_monto.innerHTML = ""
     }
 
 
@@ -198,7 +212,7 @@ function hidennButonn(){
 
 //function local storage
 function almacenarLocal(){
-
+    //guardo la lista como JSON en el local storage
     localStorage.setItem("ListaProductos", JSON.stringify(arrayObjetos))
 
 }
