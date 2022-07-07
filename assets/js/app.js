@@ -2,6 +2,7 @@
 
 //Variables
 let total = 0
+
 //trae lista del local storage
 const arrayObjetos = JSON.parse(localStorage.getItem("ListaProductos"))
 
@@ -27,6 +28,7 @@ botonModProd.addEventListener("click", clickModProd)
 
 let botonEliminaProd = document.getElementById("btneliminarprod")
 botonEliminaProd.addEventListener("click", clickEliminarProd)
+
 
 
 
@@ -81,6 +83,15 @@ function clickAgregarProd(){
         hidennButonn()
         ListaPantalla()
         almacenarLocal()
+        Toastify({
+            text: "El Producto se agrego correctamente!",
+            duration: 2500,
+            gravity: "top",
+            position: "left",
+            style: {
+              background: "linear-gradient(to right, #2C3639, #3F4E4F)",
+            },
+          }).showToast();
     }
 
 }
@@ -130,9 +141,19 @@ function clickModProd(){
                 arrayObjetos[indexM].cantidad = cantidad
             }
         }
+        ListaPantalla()
+        almacenarLocal()
+        Toastify({
+            text: "El Producto se modifico correctamente!",
+            duration: 2500,
+            gravity: "top",
+            position: "left",
+            style: {
+              background: "linear-gradient(to right, #2C3639, #3F4E4F)",
+            },
+          }).showToast();
     }
-    ListaPantalla()
-    almacenarLocal()
+
 }
 
 //funcion impime lista en pantalla
@@ -188,6 +209,15 @@ function clickEliminarProd() {
         ListaPantalla()
         hidennButonn()
         almacenarLocal()
+        Toastify({
+            text: "El Producto se elimino correctamente!",
+            duration: 2500,
+            gravity: "top",
+            position: "left",
+            style: {
+              background: "linear-gradient(to right, #2C3639, #3F4E4F)",
+            },
+          }).showToast();
     }
 }
 
