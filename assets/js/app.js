@@ -1,5 +1,6 @@
 //SUMA TOTAL DE PRODUCTOS QUE QUIERA EL USUARIO EN UNA COMPRA MAYORISTA
 
+
 //Variables
 let total = 0
 
@@ -29,7 +30,8 @@ botonModProd.addEventListener("click", clickModProd)
 let botonEliminaProd = document.getElementById("btneliminarprod")
 botonEliminaProd.addEventListener("click", clickEliminarProd)
 
-
+let botonChistes = document.getElementById("btnChistes")
+botonChistes.addEventListener("click", clickbotonChistes)
 
 
 //Funciones
@@ -74,6 +76,26 @@ function pedirDatos() {
 
 
 //Funciones (botones)
+
+//funcion click chistes
+//momentaneo porque no se me ocurria que poner
+function clickbotonChistes(){
+    fetch("https://api.chucknorris.io/jokes/random")
+        .then((resp) => resp.json())
+        .then((data) => {
+            // console.log(data)
+            Toastify({
+                text: data.value,
+                duration: 10000,
+                gravity: "top",
+                position: "left",
+                style: {
+                  background: "linear-gradient(to right, #2C3639, #3F4E4F)",
+                },
+              }).showToast();
+        } )
+    
+}
 
 //funcion click agregar producto
 function clickAgregarProd(){
